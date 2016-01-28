@@ -1,0 +1,40 @@
+<md-dialog aria-label="Mango (Fruit)"  ng-cloak flex="40" style="background-color: #F7F7F7">
+    <form>
+        <md-dialog-content layout="row">
+            <div flex="40" layout="column" layout-align="bottom center" style="margin-top: 36px;">
+                <img src="../../img/user-icon.svg" width="100">
+                <div>
+                    <h2>{{member.name}}</h2>
+                </div>
+            </div>
+            <md-card flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Detail Information</span>
+
+                        <div class="details">
+                            <div layout="row" layout-align="start center">
+                                <md-icon flex="10">phone</md-icon>
+                                <div flex>0234-3434334</div>
+                            </div>
+                            <div layout="row" layout-align="start center">
+                                <md-icon flex="10">mail</md-icon>
+                                <div flex><a href="mailto:foo@test.de">foo@test.de</a></div>
+                            </div>
+                            <div layout="row" layout-align="start center">
+                                <md-icon flex="10">date_range</md-icon>
+                                <div flex>24.09.1977</div>
+                            </div>
+                        </div>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="hide('not useful')">
+                close
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

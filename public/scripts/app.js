@@ -6,7 +6,7 @@
 
 
     angular.module('staffbook')
-        .directive('crewList', [crewList])
+        .directive('crewList', ['$mdDialog', '$mdMedia', crewList])
         .directive("colorMe", function () {
             return {
                 restrict: 'EA',
@@ -17,41 +17,69 @@
 
                 }
             }
-        });function crewList() {
+        });
+    function crewList($mdDialog) {
         return {
             restrict: 'E',
             templateUrl: '/scripts/views/crew.html',
             link: function (scope) {
+                var colors =  ["pink", "blue", "purple", "deepBlue", "lightPurple", "yellow", "green", "red"];
+                console.log(colors[Math.floor(Math.random() *colors.length) + 1]);
                 scope.tiles = [
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }},
-                    {title: "Name", span: { row : 1, col : 1 }}
+                    {name: "Hans Wurst", date: new Date(2016, 0, 27), background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]}
                 ]
+
+                scope.showDetail = function (member,ev) {
+                    function DialogController($scope, $mdDialog) {
+                        $scope.member = member;
+                        $scope.hide = function() {
+                            $mdDialog.hide();
+                        };
+                    }
+                    $mdDialog.show({
+                        controller: DialogController,
+                        templateUrl: 'scripts/views/detail.tmpl.html',
+                        parent: angular.element(document.body),
+                        targetEvent: ev,
+                        clickOutsideToClose: true
+                    })
+                        .then(function (answer) {
+                            scope.status = 'You said the information was "' + answer + '".';
+                        }, function () {
+                            scope.status = 'You cancelled the dialog.';
+                        });
+
+                };
+
+                scope.hasBirthday = function(bDate) {
+                    var date =  new Date();
+                    return bDate.getFullYear() === date.getFullYear() && bDate.getDate() === date.getDate() && bDate.getMonth() === date.getMonth();
+                }
 
             }
         };
     }
-
-
 
 
 })();
