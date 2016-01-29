@@ -4,7 +4,6 @@
         'ngMaterial'
     ]);
 
-
     angular.module('staffbook')
         .directive('crewList', ['$mdDialog', '$mdMedia', crewList])
         .directive("colorMe", function () {
@@ -18,6 +17,7 @@
                 }
             }
         });
+
     function crewList($mdDialog) {
         return {
             restrict: 'E',
@@ -29,7 +29,7 @@
                     {name: "Hans Wurst", date: new Date(2016, 0, 27), background: colors[Math.floor(Math.random() *colors.length) + 1]},
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
-                    {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
+                    {name: "Hans Wurst", date: new Date(1987,0,29),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
@@ -48,7 +48,7 @@
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]},
                     {name: "Hans Wurst", date: new Date(),  background: colors[Math.floor(Math.random() *colors.length) + 1]}
-                ]
+                ];
 
                 scope.showDetail = function (member,ev) {
                     function DialogController($scope, $mdDialog) {
@@ -74,12 +74,9 @@
 
                 scope.hasBirthday = function(bDate) {
                     var date =  new Date();
-                    return bDate.getFullYear() === date.getFullYear() && bDate.getDate() === date.getDate() && bDate.getMonth() === date.getMonth();
+                    return bDate.getDate() === date.getDate() && bDate.getMonth() === date.getMonth();
                 }
-
             }
         };
     }
-
-
 })();
