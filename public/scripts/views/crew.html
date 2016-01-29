@@ -4,14 +4,15 @@
             md-row-height-gt-md="1:1" md-row-height="4:3"
             md-gutter="6px" md-gutter-gt-sm="3px">
 
-        <md-grid-tile ng-repeat="tile in tiles"
+        <md-grid-tile ng-repeat="tile in users"
                       md-rowspan="1"
                       md-colspan="1"
                       md-colspan-sm="1"
-                      ng-class="tile.background"
-                      ng-click="showDetail(tile, $event)">
+                      color-me
+                      ng-click="showDetail(tile, $event)"
+                      class="grid-item">
             <md-icon class="birthday-badge" ng-show="hasBirthday(tile.date)">cake</md-icon>
-            <img src="../../img/user-icon.svg" width="100">
+            <img src="../../img/user-icon.svg" width="150">
             <md-grid-tile-footer>
                 <h3>{{tile.name}}</h3>
             </md-grid-tile-footer>
