@@ -1,28 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/search/:name', function (req, res, next) {
-    //var db = req.db;
-    //var collection = db.get('usercollection');
-    //collection.findById(req.params.id,function(e,docs){
-    //  res.send(docs);
-    //});
+/* search for user */
+router.get('/users/search/:term', function (req, res, next) {
+    var db = req.db;
+    var collection = db.get('usercollection');
+    var re = new RegExp(req.params.term, 'i');
+    collection.find({username: re}, function (e, docs) {
 
-    res.send([
-        {
-            "name": "StaffBook",
-            "items": [
-                {
-                    "name": "First result in category", // Will be shown in the results list panel
-                    "type": "staffBookMember", // Will be used to load custom icons / templates in the result item detail panel
-                    "description": "Whatever description" // Additional attriutes which can be accessed in custom result item detail panel
-        },{
-                    "name": "First result in category", // Will be shown in the results list panel
-                    "type": "staffBookMember", // Will be used to load custom icons / templates in the result item detail panel
-                    "description": "Whatever description" // Additional attriutes which can be accessed in custom result item detail panel
-                }
-    ]}])
+        res.send(transformToSpotlightDataStructure(docs));
+    });
+
+    function transformToSpotlightDataStructure(docs) {
+        var items = docs.map(member => {
+            member.type = 'staffBookMember';
+            member.name = member.username;
+            return member;
+        });
+        return [
+            {
+                "name": "StaffBook",
+                "items": items
+            }];
+    }
+
 });
 
 module.exports = router;

@@ -27,7 +27,7 @@
             function search() {
                 AngularSpotlightProvider.search = function ($http, $q) {
                     return function (term) {
-                        var staffBook = $http.get('/search/' + term);
+                        var staffBook = $http.get('/users/search/' + term);
 
                         return $q.all([staffBook])
                             .then(function (responses) {
@@ -41,7 +41,7 @@
 
             function addCustomTemplates() {
                 AngularSpotlightProvider.addTemplates({
-                    'staffBookMember': '../spotlight/templates/staffBook.html'
+                    'staffBookMember': '/spotlight/templates/staffBook.html'
                 });
             }
 
