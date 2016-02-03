@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* POST new user. */
-router.post('/user', function(req, res, next) {
+router.post('/users', function(req, res, next) {
   var db = req.db;
   var collection = db.get('usercollection');
 

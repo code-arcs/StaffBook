@@ -1,0 +1,28 @@
+[
+  {
+    "name":"Mustermann",
+    "surname":"Max",
+    "contraction":"MM",
+    "area":"Entwicklung",
+    "location":"Bochum",
+    "number":"1337",
+    "costcenter":"13",
+    "birthday":"25.08.1981",
+    "mobil":"",
+    "telephone":"+49 111 525 264",
+    "email":"foo@bar.de"
+  },
+  {
+    "name":"Musterfrau",
+    "surname":"Mechthilt"
+    "contraction":"MMU",
+    "area":"Entwicklung",
+    "location":"Bochum",
+    "number":"1337",
+    "costcenter":"13",
+    "birthday":"25.08.1981",
+    "mobil":"",
+    "telephone":"+49 111 525 264",
+    "email":"foo@bar.de"
+  }
+]

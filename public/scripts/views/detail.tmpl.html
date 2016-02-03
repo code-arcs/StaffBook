@@ -1,10 +1,13 @@
-<md-dialog aria-label="Mango (Fruit)"  ng-cloak flex="40" style="background-color: #F7F7F7">
+<md-dialog class="modal" aria-label="Mango (Fruit)"  ng-cloak flex="40" style="background-color: #F7F7F7">
     <form>
         <md-dialog-content layout="row">
             <div flex="40" layout="column" layout-align="bottom center" style="margin-top: 36px;">
-                <img src="../../img/user-icon.svg" width="100">
-                <div>
-                    <h2>{{member.name}}</h2>
+                <img flex src="../../img/user-icon.svg" width="100">
+                <div flex layout="row"  layout-align="center end">
+                    <h2>{{member.name}} {{member.surname}}</h2>
+                </div>
+                <div flex layout="row"  layout-align="center end">
+                    <h5 class="modal--area">{{member.area}}</h5>
                 </div>
             </div>
             <md-card flex>
@@ -15,15 +18,15 @@
                         <div class="details">
                             <div layout="row" layout-align="start center">
                                 <md-icon flex="10">phone</md-icon>
-                                <div flex>0234-3434334</div>
+                                <div flex>{{member.telephone}}</div>
                             </div>
                             <div layout="row" layout-align="start center">
                                 <md-icon flex="10">mail</md-icon>
-                                <div flex><a href="mailto:foo@test.de">foo@test.de</a></div>
+                                <div flex><a href="mailto:{{member.email}}">{{member.email}}</a></div>
                             </div>
                             <div layout="row" layout-align="start center">
                                 <md-icon flex="10">date_range</md-icon>
-                                <div flex>24.09.1977</div>
+                                <div flex>{{member.birthday}}</div>
                             </div>
                         </div>
                     </md-card-title-text>

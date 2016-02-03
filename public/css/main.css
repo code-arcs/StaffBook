@@ -36,3 +36,7 @@ md-toast {
     display: block;
     position: relative;
 }
+
+.modal--area {
+    margin: 0;    
+}
