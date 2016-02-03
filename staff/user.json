@@ -7,22 +7,22 @@
     "location":"Bochum",
     "number":"1337",
     "costcenter":"13",
-    "birthday":"25.08.1981",
+    "birthday":"25.08.1990",
     "mobil":"",
-    "telephone":"+49 111 525 264",
+    "telephone":"+49 123 456 7892",
     "email":"foo@bar.de"
   },
   {
     "name":"Musterfrau",
-    "surname":"Mechthilt"
+    "surname":"Mechthilt",
     "contraction":"MMU",
     "area":"Entwicklung",
     "location":"Bochum",
     "number":"1337",
     "costcenter":"13",
-    "birthday":"25.08.1981",
+    "birthday":"25.07.1981",
     "mobil":"",
-    "telephone":"+49 111 525 264",
+    "telephone":"+49 987 654 321",
     "email":"foo@bar.de"
   }
 ]

@@ -6,7 +6,7 @@ router.get('/users/search/:term', function (req, res, next) {
     var db = req.db;
     var collection = db.get('usercollection');
     var re = new RegExp(req.params.term, 'i');
-    collection.find({username: re}, function (e, docs) {
+    collection.find({name: re}, function (e, docs) {
 
         res.send(transformToSpotlightDataStructure(docs));
     });
@@ -14,7 +14,6 @@ router.get('/users/search/:term', function (req, res, next) {
     function transformToSpotlightDataStructure(docs) {
         var items = docs.map(member => {
             member.type = 'staffBookMember';
-            member.name = member.username;
             return member;
         });
         return [
