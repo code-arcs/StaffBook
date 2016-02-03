@@ -1,7 +1,8 @@
 (function () {
 
     angular.module('staffbook', [
-        'ngMaterial'
+        'ngMaterial',
+        'de.devjs.angular.spotlight'
     ]);
 
     angular.module('staffbook')
@@ -19,6 +20,31 @@
 
                 }
             }
+        })
+        .config(function configuration(AngularSpotlightProvider) {
+
+            search();
+            function search() {
+                AngularSpotlightProvider.search = function ($http, $q) {
+                    return function (term) {
+                        var staffBook = $http.get('/search/' + term);
+
+                        return $q.all([staffBook])
+                            .then(function (responses) {
+                                return responses[0].data;
+                            });
+                    }
+                };
+            }
+
+            addCustomTemplates();
+
+            function addCustomTemplates() {
+                AngularSpotlightProvider.addTemplates({
+                    'staffBookMember': '../spotlight/templates/staffBook.html'
+                });
+            }
+
         })
         .factory('MemberService', ['$http', '$q', MemberService]);
 

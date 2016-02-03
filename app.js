@@ -43,6 +43,7 @@ var getUser = require('./routes/getUserRoute');
 var updateUser = require('./routes/updateUserRoute');
 var deleteUser = require('./routes/deleteUserRoute');
 var setUsersPicture = require('./routes/setUserPictureRoute');
+var searchRoute = require('./routes/searchRoute');
 
 app.use('/', routes);
 app.use('/', getUsers);
@@ -51,6 +52,7 @@ app.use('/', getUser);
 app.use('/', setUser);
 app.use('/', updateUser);
 app.use('/', deleteUser);
+app.use('/', searchRoute);
 app.post('/user/:id/avatar', upload.single('avatar'), setUsersPicture);
 
 // catch 404 and forward to error handler
