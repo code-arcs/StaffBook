@@ -57,6 +57,7 @@
                 MemberService.getAllMember()
                     .then(function (_users) {
                         scope.users = _users.data;
+                        scope.usersHaveBirthday();
                     });
 
                 scope.showDetail = function (member, ev) {
@@ -80,8 +81,8 @@
                 scope.hasBirthday = function (_date) {
                     var dateNow = new Date();
                     var bDate = new Date(_date);
-                    return bDate.getDate() === dateNow.getDate() && bDate.getMonth() === dateNow.getMonth();                //
-                }
+                    return bDate.getDate() === dateNow.getDate() && bDate.getMonth() === dateNow.getMonth();
+                };
 
                 scope.showBirthdayToast = function (bList) {
                     function ToastController($scope, $mdToast) {
@@ -107,8 +108,8 @@
                     if (bList.length > 0) {
                         scope.showBirthdayToast(bList);
                     }
-                }
-                scope.usersHaveBirthday();
+                };
+
             }
         };
     }
@@ -116,10 +117,10 @@
     function MemberService($http, $q) {
         return {
             getAllMember: getAllMember
-        }
+        };
 
         function getAllMember() {
-            return $http.get('http://localhost:3000/users');
+            return $http.get('/users');
         }
     }
 })();
