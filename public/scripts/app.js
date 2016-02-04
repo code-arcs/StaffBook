@@ -2,11 +2,12 @@
 
     angular.module('staffbook', [
         'ngMaterial',
-        'de.devjs.angular.spotlight'
+        'de.devjs.angular.spotlight',
+        'ngFileUpload'
     ]);
 
     angular.module('staffbook')
-        .directive('crewList', ['$mdDialog', '$mdToast', '$document', 'MemberService', crewList])
+        .directive('crewList', ['$mdDialog', '$mdToast', '$document', 'MemberService', 'Upload',  crewList])
         .directive("colorMe", function () {
             return {
                 restrict: 'EA',
@@ -77,11 +78,35 @@
                     });
 
                 scope.showDetail = function (member, ev) {
-                    function DialogController($scope, $mdDialog) {
+
+                    function DialogController($scope, $mdDialog, Upload) {
                         $scope.member = member;
                         $scope.hide = function () {
-                            $mdDialog.hide();
+                            $mdDialog.hide($scope.member);
                         };
+
+                        $scope.submit = function() {
+                            if ($scope.avatar) {
+                                $scope.upload($scope.avatar);
+                            }
+                        };
+
+                        // upload on file select or drop
+                        $scope.upload = function (file) {
+                            Upload.upload({
+                                url: 'user/' + $scope.member._id + '/avatar',
+                                data: {file: file, 'name': 'avatar'}
+                            }).then(function (resp) {
+                                $scope.member = resp.data;
+                                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                            }, function (resp) {
+                                console.log('Error status: ' + resp.status);
+                            }, function (evt) {
+                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                            });
+                        }
+
                     }
 
                     $mdDialog.show({
@@ -90,7 +115,12 @@
                         parent: angular.element(document.body),
                         targetEvent: ev,
                         clickOutsideToClose: true
-                    });
+                    })
+                    .then(function(_member) {
+                            //FIXME: update user after edit
+                            scope.users.push(_member);
+                            member.avatar = _member.avatar;
+                        });
                 };
 
 

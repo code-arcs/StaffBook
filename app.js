@@ -53,7 +53,7 @@ app.use('/', setUser);
 app.use('/', updateUser);
 app.use('/', deleteUser);
 app.use('/', searchRoute);
-app.post('/user/:id/avatar', upload.single('avatar'), setUsersPicture);
+app.post('/user/:id/avatar', upload.single('file'), setUsersPicture);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
