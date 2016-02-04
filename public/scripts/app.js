@@ -21,6 +21,22 @@
                 }
             }
         })
+        .directive("backgroundAvatar", function () {
+            return {
+                restrict: 'A',
+                replace: false,
+                link: function (scope, element, attributes) {
+                    if(attributes["backgroundAvatar"]) {
+                        element.css('background-image', 'url(' + attributes["backgroundAvatar"]+ ')');
+                        element.addClass('avatar');
+                    } else {
+                        element.css('background-image', 'url(/img/user-icon.svg)');
+                        element.addClass('defaultAvatar');
+                    }
+                    element.addClass('zooming');
+                }
+            }
+        })
         .config(function configuration(AngularSpotlightProvider) {
 
             search();
