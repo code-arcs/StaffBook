@@ -21,22 +21,33 @@
                 }
             }
         })
-        .directive("backgroundAvatar", function () {
+        .directive("backgroundAvatar", ['$http', function ($http) {
             return {
                 restrict: 'A',
                 replace: false,
                 link: function (scope, element, attributes) {
-                    if(attributes["backgroundAvatar"]) {
-                        element.css('background-image', 'url(' + attributes["backgroundAvatar"]+ ')');
+
+                    if (scope.tile.avatar) {
+                        element.css('background-image', 'url(' + scope.tile.avatar + ')');
                         element.addClass('avatar');
                     } else {
+                        var gravatarUrl = gravatar(scope.tile.email, {size: 400, backup: 404});
+                        $http.get(gravatarUrl)
+                            .then(function () {
+                                element.css('background-image', 'url(' + gravatarUrl + ')')
+                                    .removeClass('defaultAvatar')
+                                    .addClass('avatar');
+                            })
+                            .catch(function (err) {});
+
+                        // Fallback
                         element.css('background-image', 'url(/img/user-icon.svg)');
                         element.addClass('defaultAvatar');
                     }
                     element.addClass('zooming');
                 }
             }
-        })
+        }])
         .config(function configuration(AngularSpotlightProvider) {
 
             search();
